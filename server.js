@@ -1,6 +1,9 @@
-const express = require('express');
+const express = require("express");
 const server = express();
-server.use(express.urlencoded({extended:true}));
+const router = require("./auth/authRoute");
+server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
-server.listen('2020', () => {
-   console.log('Listening on the future....')})
+server.use("/api", router);
+server.listen("2020", () => {
+  console.log("Listening on the future....");
+});
