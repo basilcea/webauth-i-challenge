@@ -13,8 +13,8 @@ const getUsers = async id => {
   return getAllUsers;
 };
 const getByUsername = async username => {
-  getUser = await db("users").where("username", username);
-  return getUsers(getUser);
+  getUser = await db("users").where("username", username).first();
+  return getUser;
 };
 module.exports = {
   addUser,

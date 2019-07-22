@@ -11,11 +11,11 @@ const register = async (req, res) => {
     if (!!encrypt.crypted.isUniqueEmail(username, getAllUsers)) {
       status(res, 400, "Username already exists");
     }
-    const hashPassword = encrypt.crypted.hashPassword(bcrypt, password, 12);
+    const hashPassword = encrypt.crypted.hashPassword(encrypt.customCrypt, password, 12);
     const AddUser = await Users.addUser(username, hashPassword);
     status(res, 201, AddUser);
   } catch (err) {
-    status(res, 500, "Could Not register");
+    status(res, 500,err.toString());
   }
 };
 const login = async (req, res) => {
@@ -25,12 +25,12 @@ const login = async (req, res) => {
     if (!getUser) {
       status(res, 404, "Username does not exist");
     }
-    if (!encrypt.crypted.comparePassword(bcrypt, password, getUser.password)) {
+    if (!encrypt.crypted.comparePassword(encrypt.customCrypt, password, getUser.password)) {
       status(res, 404, "Wrong Password");
     }
     status(res, 200, `Welcome ${getUser.username}`);
   } catch (err) {
-    status(res, 500, "Login Unsuccesful");
+    status(res, 500, err.toString());
   }
 };
 const getUsers = async () => {};
