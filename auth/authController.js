@@ -8,7 +8,7 @@ const register = async (req, res) => {
   const { username, password } = req.body;
   try {
     const getAllUsers = await Users.getUsers();
-    if (!!encrypt.crypted.isUniqueEmail(username, getAllUsers)) {
+    if (!!encrypt.crypted.isUniqueUsername(username, getAllUsers)) {
       status(res, 400, "Username already exists");
     }
     const hashPassword = encrypt.crypted.hashPassword(encrypt.customCrypt, password, 12);
