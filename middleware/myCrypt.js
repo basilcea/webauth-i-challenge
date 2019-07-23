@@ -6,12 +6,6 @@ const crypted = {
   },
   comparePassword(cryptMethod, password, hashPassword) {
     return cryptMethod.compareSync(password, hashPassword);
-  },
-  isUniqueUsername(columnValue, query) {
-    if (query.length === 0 || query.map(a => a.username).includes(columnValue) === false) {
-      return false;
-    }
-    else return true
   }
 };
 
